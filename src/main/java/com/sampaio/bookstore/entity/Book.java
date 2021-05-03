@@ -1,11 +1,22 @@
 package com.sampaio.bookstore.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 
 
 @Data
@@ -18,15 +29,23 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false, unique = true)
+    
+    @NotNull(message = "Campo Nao pode ser nulo")
+    @Column(length = 100, unique = true)
     private String name;
-    @Column(nullable=false)
+   
+    @NotNull(message = "Campo Nao pode ser nulo")
     private Integer pages;
-    @Column(nullable=false)
+   
+    @NotNull(message = "Campo Nao pode ser nulo")
     private Integer chapters;
-    @Column(nullable=false)
+    
+    @NotNull(message = "Campo Nao pode ser nulo")
+    @Column(length = 20 )
     private String isbn;
-    @Column(nullable=false, unique = true, name = "publisher_name")
+    
+    @NotNull(message = "Campo Nao pode ser nulo")
+    @Column(length = 100, unique = true, name = "publisher_name")
     private String publishName;
 
     @ManyToOne( fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST , CascadeType.MERGE, CascadeType.REMOVE })

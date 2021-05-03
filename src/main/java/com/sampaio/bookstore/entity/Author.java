@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
@@ -18,9 +19,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false, unique = true)
+    @NotNull(message = "Campo Nao pode ser nulo")
+    @Column(length = 100, unique = true)
     private String name;
 
-    @Column(nullable = false)
+    @NotNull(message = "Campo Nao pode ser nulo")
     private Integer age;
 }
